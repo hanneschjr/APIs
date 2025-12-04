@@ -1,3 +1,5 @@
+# API DE DADOS DE CLIMA DA OPENWEATHER - ENDPOINT: http://api.openweather.org/data/2.5/weather
+
 import os
 import dotenv
 from request_api_utils import do_request

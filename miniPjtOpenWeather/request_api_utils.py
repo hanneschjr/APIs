@@ -1,3 +1,5 @@
+# AQUIVO DE REQUEST PARA GET(URL, PARAMS)
+
 import requests
 
 def do_request(url, params=None):
