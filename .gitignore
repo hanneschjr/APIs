@@ -1,3 +1,5 @@
 venv/
 miniPjtOpenWeather/.env
 miniPjtSpotify/.env
+miniPjtSpotify/__pycache__/*
+miniPjtOpenWeather/__pycache__/*
