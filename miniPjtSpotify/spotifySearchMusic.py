@@ -2,7 +2,7 @@
 
 import os
 import dotenv
-from request_api_utils import do_request
+from miniPjtSpotify.requests import request_item
 import requests
 
 dotenv.load_dotenv()
@@ -17,6 +17,6 @@ def openWeatherApi(local):
         'lang': 'pt_br'
     }
 
-    response = do_request(url=url, params=params)
+    response = request_item(url=url, params=params)
 
     return response

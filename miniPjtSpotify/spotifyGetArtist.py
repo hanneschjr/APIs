@@ -1,15 +1,14 @@
-# API DE DADOS DE CLIMA DA OPENWEATHER - ENDPOINT: http://api.openweather.org/data/2.5/weather
+# API  - ENDPOINT: https://api.spotify.com/v1/artists/{id}
 
 import os
 import dotenv
-from request_api_utils import do_request
 import requests
 
 dotenv.load_dotenv()
 token = os.environ['API_PASSWORD']
 
-def openWeatherApi(local):
-    url = "http://api.openweathermap.org/data/2.5/weather"
+def getArtirstID(artistName):
+    url = f"https://api.spotify.com/v1/artists/{artistName}"
     params = {
         'q': local,
         'appid': token,
