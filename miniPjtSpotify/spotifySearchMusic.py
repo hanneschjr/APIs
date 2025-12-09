@@ -2,7 +2,7 @@
 
 import os
 import dotenv
-from miniPjtSpotify.requests import request_item
+from miniPjtSpotify.requests_api import request_item
 import requests
 
 dotenv.load_dotenv()

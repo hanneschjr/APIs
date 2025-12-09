@@ -15,7 +15,10 @@ def request_token(url, body, auth):
     return response
 
 def request_item(url, params, token):
-    response = requests.get(url=url, params=params, auth=token)
+    headers ={
+        "Authorization": f"Bearer {token}"
+    }
+    response = requests.get(url=url, params=params, headers=headers)
 
     try:
         response.raise_for_status()
