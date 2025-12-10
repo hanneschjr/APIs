@@ -1,6 +1,6 @@
 # API  SEARCH ITEM- ENDPOINT: https://api.spotify.com/v1/search
 
-from requests_api import request_item
+from requests_api import request_artist
 from getToken import getSpotifyToken
 from pprint import pprint
 
@@ -12,17 +12,20 @@ from pprint import pprint
 #         'type': type,
 #     }
 
-def getItem(item, type):
+def getArtist(artista):
     url = "https://api.spotify.com/v1/search"
     params = {
-        "q": item,
-        "type": type,
+        "q": artista,
+        "type": "artist",
     }
     token = getSpotifyToken()
-    response = request_item(url, params, token)
-
-    return response
+    response = request_artist(url, params, token)
+    try:
+        primeiro_resultado = response['artists']['items'][0]
+    except IndexError:
+        primeiro_resultado = None
+    return primeiro_resultado
 
 if __name__ == "__main__":
-    response = getItem("Post Malone", "artist")
+    response = getArtist("Post Malone")
     pprint(response)
