@@ -12,4 +12,7 @@ def getTopMusics(id_artist):
 
 if __name__ == "__main__":
     response = getTopMusics("246dkjvS1zLTtiykXe5h60")
-    pprint(response)
+    for musica in response['tracks']:
+        nome_musica = musica['name']
+        popularidade_musica = musica['popularity']
+        print(nome_musica, popularidade_musica)

@@ -1,34 +1,38 @@
-# FRONT-END EM STREAMLIT 
-
+# FRONT-END EM STREAMLIT WEB APP SPOTIFY
+import streamlit as st
 import pandas as pd
 import streamlit as st
-from miniPjtSpotfy.spotifyName import openWeatherApi
-
+from getToken import getSpotifyToken
+from searchArtist import getArtist
+from searchTopMusic import getTopMusics
 
 def main():
-    st.title("Web App Tempo")
-    st.write('Dados do OpenWeather: (https://openweathermap.org/current)')
-    local = st.text_input('Digite uma cidade:')
-    dados_tempo = openWeatherApi(local)
+    st.title("Web App Spotify")
+    st.write('Dados da API do Spotify: (https://developer.spotify.com/documentatioon/web-api)')
+    nome_artista = st.text_input('Busque um artista:')
 
-    if not dados_tempo:
-        st.warning(f"Dados não encontrados para a cidade {local}")
+    if not nome_artista:
+        st.warning(f"Dados não encontrados para o nome: {nome_artista}")
         st.stop()
     
-    clima_atual = dados_tempo['weather'][0]['description']
-    temperatura = dados_tempo['main']['temp']
-    sensacao_termica = dados_tempo['main']['feels_like']
-    umidade = dados_tempo['main']['humidity']
-    cobertura_nuves = dados_tempo['clouds']['all']
+    artista = getArtist(nome_artista)
+
+    if not artista:
+        st.warning(f'Artista não foi encontrado! (busca: {nome_artista})')
+
+    id_artista = artista['id']
+    nome_artista = artista['name']
+    popularidade_artista = artista['popularity']
+
+    melhores_musicas = getTopMusics(id_artista)
+
+    st.subheader(f'Artista: {nome_artista} (pop: {popularidade_artista})')
+   
+    for musica in melhores_musicas['tracks']:
+        nome_musica = musica['name']
+        popularidade_musica = musica['popularity']
+        st.write(f'{nome_musica} (pop: {popularidade_musica})')
     
-    st.metric(label='Tempo atual', value=clima_atual)
-    col1, col2 = st.columns(2)
-    with col1:
-        st.metric(label="Teperatura", value=f'{temperatura} °C')
-        st.metric(label="Sensação Térmica", value=f'{sensacao_termica} °C')
-    with col2:
-        st.metric(label="Umidade", value=f'{umidade} %')
-        st.metric(label="Cobertura de Nuvens", value=f'{cobertura_nuves} %')
 
 
 if __name__ == '__main__':
